@@ -64,6 +64,7 @@ public class CalibreWrapper {
 		Map<String, String> osMap = new HashMap<String, String>() {{
             put("windows", "c:/bin/calibre/calibre2/" + "ebook-convert.exe");
             put("linux",  "/usr/bin/" + "ebook-convert");
+            put("mac os x", "/Applications/calibre.app/Contents/MacOS/" + "ebook-convert");
         }};
 
         String os = System.getProperty("os.name").toLowerCase();
@@ -92,7 +93,7 @@ public class CalibreWrapper {
      * @return true if true, false if false :-)
      */
     public boolean calibreIsAvailable() {
-        return CALIBRE_CONVERT != null;
+        return CALIBRE_CONVERT != null && "true".equalsIgnoreCase(System.getProperty("enable-calibre", "true"));
     }
 
     /**
@@ -176,8 +177,9 @@ public class CalibreWrapper {
 
 		//we need to redirect stderr to stdout otherwise bad things happen if drm is detected and stderr is written to first
 		ToolRunner runner = new ToolRunner(true);
+		File newEbook = null;
 		try {
-			File newEbook = File.createTempFile(pFile.getName()+"-", ".txt");
+			newEbook = File.createTempFile(pFile.getName()+"-", ".txt");
 			newEbook.deleteOnExit();
 			List<String> commandLine = new ArrayList<String>();
 			commandLine.addAll(CALIBRE_CONVERT);
@@ -204,6 +206,8 @@ public class CalibreWrapper {
 			return ret;
         } catch (Exception e) {
             LOGGER.error("Exception while trying to validate with Calibre: {}", e);
+        } finally {
+            if (newEbook != null) newEbook.delete();
         }
 		return ret;
 	}
