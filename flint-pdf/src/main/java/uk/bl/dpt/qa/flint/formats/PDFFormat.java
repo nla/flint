@@ -110,7 +110,7 @@ public class PDFFormat extends PolicyAware implements Format, HadoopFormat {
         }
         Long startTime = System.currentTimeMillis();
 
-        if (!System.getProperty("enable-pdfbox", "true").equalsIgnoreCase("true")) {
+        if (!System.getProperty("enable-pdfbox", "true").equalsIgnoreCase("false")) {
             checkResult.addAll(TimedValidation.validate(new PolicyValidation(WRAPPER_TIMEOUT, patternFilter), contentFile));
         }
         checkResult.addAll(TimedValidation.validate(new SpecificDrmChecks(WRAPPER_TIMEOUT, patternFilter), contentFile));

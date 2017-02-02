@@ -62,7 +62,7 @@ public class Wellformedness extends TimedTask {
             logger.info("Adding additional well-formedness checks for {}", contentFile);
             CheckCategory cc = new CheckCategory(catName);
 
-            if (!System.getProperty("enable-pdfbox", "true").equalsIgnoreCase("true")) {
+            if (!System.getProperty("enable-pdfbox", "true").equalsIgnoreCase("false")) {
                 cc.add(new CheckCheck("isValidPDFBox", new PDFBoxWrapper().isValid(contentFile), null));
                 logger.debug(cc.get("isValidPDFBox").toString());
             }
