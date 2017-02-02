@@ -54,7 +54,7 @@ public class PDFBoxWrapper {
 
     private static Logger LOGGER = LoggerFactory.getLogger(PDFBoxWrapper.class);
 
-    private static Map<String, Element> pseudoCache = new HashMap<String, Element>();
+    private final Map<String, Element> pseudoCache = new HashMap<String, Element>();
 
     private final XmlResultParser parser = new CachingXmlResultParser();
 
@@ -64,7 +64,7 @@ public class PDFBoxWrapper {
      * As preflight is used more than once for different puroposes the result
      * shall be cached for performance reasons.
      */
-    private static class CachingXmlResultParser extends XmlResultParser {
+    private class CachingXmlResultParser extends XmlResultParser {
         public Element validate (Document rdocument, DataSource source) throws IOException {
             synchronized (this.getClass()) {
                 if (pseudoCache.containsKey(source.getName())) {
