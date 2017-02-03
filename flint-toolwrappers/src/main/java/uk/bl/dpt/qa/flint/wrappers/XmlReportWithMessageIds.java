@@ -16,30 +16,26 @@
  */
 package uk.bl.dpt.qa.flint.wrappers;
 
+import com.adobe.epubcheck.api.EPUBLocation;
 import com.adobe.epubcheck.messages.Message;
 import com.adobe.epubcheck.messages.MessageId;
-import com.adobe.epubcheck.messages.MessageLocation;
 import com.adobe.epubcheck.messages.Severity;
 import com.adobe.epubcheck.util.XmlReportImpl;
 
-import java.io.File;
+import java.io.PrintWriter;
 
 /**
  * The single purpose of this class is to report messages using the messageIds
  * (based on Enums) as message content.
  */
 public class XmlReportWithMessageIds extends XmlReportImpl {
-    
-    private File reportFile;
 
-    public XmlReportWithMessageIds(File out, String ePubName, String versionEpubCheck) {
+    public XmlReportWithMessageIds(PrintWriter out, String ePubName, String versionEpubCheck) {
         super(out, ePubName, versionEpubCheck);
-        
-        this.reportFile = out;
     }
 
     @Override
-    public void message(Message message, MessageLocation location, Object... arg) {
+    public void message(Message message, EPUBLocation location, Object... arg) {
 
     	class MyMessage extends Message {
             public MyMessage(MessageId messageId, Severity severity, String message, String suggestion) {
@@ -49,10 +45,6 @@ public class XmlReportWithMessageIds extends XmlReportImpl {
         
         Message myMessage = new MyMessage(message.getID(), message.getSeverity(), message.getMessage(), message.getSuggestion());
         super.message(myMessage, location, arg);
-    }
-    
-    public File getReportFile() {
-        return reportFile;
     }
 
 }

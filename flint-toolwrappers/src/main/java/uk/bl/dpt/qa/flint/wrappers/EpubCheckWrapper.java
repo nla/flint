@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class EpubCheckWrapper {
         File reportFile = null;
         if (report == null) {
             reportFile = File.createTempFile("epubcheck-report", "-for-" + file.getName() + ".xml");
-            report = new XmlReportWithMessageIds(reportFile, file.getName(), EpubCheck.version());
+            report = new XmlReportWithMessageIds(new PrintWriter(reportFile), file.getName(), EpubCheck.version());
             EpubCheck check = new EpubCheck(file, report);
             check.validate();
             report.generate();
