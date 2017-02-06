@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,10 +52,12 @@ public class EpubCheckWrapper {
         File reportFile = null;
         if (report == null) {
             reportFile = File.createTempFile("epubcheck-report", "-for-" + file.getName() + ".xml");
-            report = new XmlReportWithMessageIds(reportFile, file.getName(), EpubCheck.version());
-            EpubCheck check = new EpubCheck(file, report);
-            check.validate();
-            report.generate();
+            try (PrintWriter pw = new PrintWriter(reportFile)) {
+                report = new XmlReportWithMessageIds(pw, file.getName(), EpubCheck.version());
+                EpubCheck check = new EpubCheck(file, report);
+                check.validate();
+                report.generate();
+            }
             LOGGER.info("Generated EpubCheck report at {}");
             miniCache.put(file.getAbsolutePath(), report);
         }

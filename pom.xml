@@ -55,7 +55,7 @@
         <controlsfx.version>8.0.5</controlsfx.version>
         <cucumber.version>1.1.6</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
-        <epubcheck.version>v4.0.0-alpha2</epubcheck.version>
+        <epubcheck.version>4.0.2</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
         <guava.version>17.0</guava.version>
         <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
