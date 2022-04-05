@@ -55,9 +55,9 @@
         <controlsfx.version>8.0.5</controlsfx.version>
         <cucumber.version>1.1.6</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
-        <epubcheck.version>4.0.2</epubcheck.version>
+        <epubcheck.version>4.2.6</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
-        <guava.version>17.0</guava.version>
+        <guava.version>24.1.1-jre</guava.version>
         <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
         <itextpdf.version>5.4.5</itextpdf.version>
         <jackson.version>1.9.13</jackson.version>
@@ -258,7 +258,7 @@
             </dependency>
             <!-- epubcheck defunct until a new version comes out-->
             <dependency>
-                <groupId>org.idpf</groupId>
+                <groupId>org.w3c</groupId>
                 <artifactId>epubcheck</artifactId>
                 <version>${epubcheck.version}</version>
             </dependency>
