@@ -19,6 +19,7 @@ package uk.bl.dpt.qa.flint;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import uk.bl.dpt.qa.flint.checks.CheckResult;
 import uk.bl.dpt.qa.flint.epub.checks.FixedCategories;
@@ -28,6 +29,9 @@ import java.io.File;
 /**
  * Test collection for epub validation.
  */
+// Finding/creating Creative Commons DRM files is difficult, so
+// ignore these tests until we can find them.
+@Ignore("Sample files provided aren't actually DRM")
 public class FlintEPUBTest {
 
     private Flint flint;
