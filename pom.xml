@@ -57,7 +57,7 @@
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
         <epubcheck.version>4.2.6</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
-        <guava.version>24.1.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
         <itextpdf.version>5.4.5</itextpdf.version>
         <jackson.version>1.9.13</jackson.version>
