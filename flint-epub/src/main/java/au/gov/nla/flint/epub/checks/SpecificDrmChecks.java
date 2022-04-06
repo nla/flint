@@ -57,18 +57,12 @@ public class SpecificDrmChecks extends TimedTask {
         boolean ret = false;
 
         final String RIGHTSFILE = "META-INF/rights.xml";//http://www.idpf.org/epub/30/spec/epub30-ocf.html#sec-container-metainf-rights.xml
-        final String ENCFILE = "META-INF/encryption.xml";//http://www.idpf.org/epub/30/spec/epub30-ocf.html#sec-container-metainf-encryption.xml
 
         ZipFile zip;
         try {
             zip = new ZipFile(pEPUB);
 
             ZipEntry entry = zip.getEntry(RIGHTSFILE);
-            if(null!=entry) {
-                ret = true;
-            }
-
-            entry = zip.getEntry(ENCFILE);
             if(null!=entry) {
                 ret = true;
             }
@@ -83,7 +77,6 @@ public class SpecificDrmChecks extends TimedTask {
             e.printStackTrace();
         }
 
-        //System.out.println("Rights and/or encryption file: "+ret);
         return ret;
     }
 
