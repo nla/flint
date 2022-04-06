@@ -301,6 +301,12 @@
                 <artifactId>xz</artifactId>
                 <version>${xz.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
+            <dependency>
+                <groupId>net.sf.saxon</groupId>
+                <artifactId>Saxon-HE</artifactId>
+                <version>9.8.0-8</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-client</artifactId>
