@@ -15,12 +15,12 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package uk.bl.dpt.qa;
+package au.gov.nla;
 
 import org.junit.Test;
-import uk.bl.dpt.qa.flint.checks.CheckCategory;
-import uk.bl.dpt.qa.flint.checks.CheckCheck;
-import uk.bl.dpt.qa.flint.checks.CheckResult;
+import au.gov.nla.flint.checks.CheckCategory;
+import au.gov.nla.flint.checks.CheckCheck;
+import au.gov.nla.flint.checks.CheckResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;

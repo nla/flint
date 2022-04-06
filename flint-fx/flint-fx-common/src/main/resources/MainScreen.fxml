@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainStage" prefHeight="400.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.bl.dpt.qa.flint.Controller">
+<AnchorPane fx:id="mainStage" prefHeight="400.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="au.gov.nla.flint.Controller">
 <children><FlowPane prefHeight="50.0" prefWidth="533.0">
 <children><TextField alignment="CENTER" editable="false" prefHeight="80.0" prefWidth="533.0" text="FLintFX">
 <font>

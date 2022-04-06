@@ -24,9 +24,9 @@ import org.apache.hadoop.mrunit.types.Pair;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import uk.bl.dpt.qa.flint.Flint;
-import uk.bl.dpt.qa.flint.checks.CheckResult;
-import uk.bl.dpt.qa.flint.hadoop.FlintHadoop;
+import au.gov.nla.flint.Flint;
+import au.gov.nla.flint.checks.CheckResult;
+import au.gov.nla.flint.hadoop.FlintHadoop;
 
 import java.io.File;
 import java.io.IOException;

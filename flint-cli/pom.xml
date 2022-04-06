@@ -3,7 +3,7 @@
 
     <parent>
         <artifactId>flint</artifactId>
-        <groupId>uk.bl.dpt.qa</groupId>
+        <groupId>au.gov.nla</groupId>
         <version>0.9.1-SNAPSHOT</version>
     </parent>
 
@@ -11,7 +11,7 @@
 
     <properties>
         <java.version>1.7</java.version>
-        <mainclass>uk.bl.dpt.qa.flint.CoreApp</mainclass>
+        <mainclass>au.gov.nla.flint.CoreApp</mainclass>
     </properties>
 
     <build>
@@ -51,7 +51,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>uk.bl.dpt.qa.flint.PolicyPropertiesCreatorApp</mainClass>
+                                    <mainClass>au.gov.nla.flint.PolicyPropertiesCreatorApp</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
