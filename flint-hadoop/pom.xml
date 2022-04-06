@@ -9,7 +9,7 @@
     <artifactId>flint-hadoop</artifactId>
 
     <properties>
-        <mainclass>FlintHadoop</mainclass>
+        <mainclass>au.gov.nla.flint.FlintHadoop</mainclass>
     </properties>
 
     <dependencies>
