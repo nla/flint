@@ -15,7 +15,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package uk.bl.dpt.qa.flint;
+package au.gov.nla.flint;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +48,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import uk.bl.dpt.qa.flint.checks.CheckResult;
-import uk.bl.dpt.qa.flint.checks.CheckCategory;
+import au.gov.nla.flint.checks.CheckResult;
+import au.gov.nla.flint.checks.CheckCategory;
 
 /**
  * A superclass for the Controllers of flint-fx providing elements

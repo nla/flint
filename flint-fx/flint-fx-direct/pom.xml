@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>uk.bl.dpt.qa</groupId>
+		<groupId>au.gov.nla</groupId>
 		<artifactId>flint-fx</artifactId>
 		<version>0.9.1-SNAPSHOT</version>
 	</parent>

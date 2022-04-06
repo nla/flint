@@ -15,12 +15,12 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package uk.bl.dpt.qa.flint;
+package au.gov.nla.flint;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import uk.bl.dpt.qa.flint.checks.CheckResult;
-import uk.bl.dpt.qa.flint.utils.PolicyPropertiesCreator;
+import au.gov.nla.flint.checks.CheckResult;
+import au.gov.nla.flint.utils.PolicyPropertiesCreator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import uk.bl.dpt.qa.flint.wrappers.TikaWrapper;
+import au.gov.nla.flint.wrappers.TikaWrapper;
 
 /**
  * A controller for the flint-fx GUI that directly runs the flint classes.

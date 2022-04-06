@@ -3,7 +3,7 @@
 
     <parent>
         <artifactId>flint</artifactId>
-        <groupId>uk.bl.dpt.qa</groupId>
+        <groupId>au.gov.nla</groupId>
         <version>0.9.1-SNAPSHOT</version>
     </parent>
 
