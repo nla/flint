@@ -6,7 +6,7 @@
     <parent>
         <artifactId>flint-fx</artifactId>
         <groupId>au.gov.nla</groupId>
-        <version>0.9.1-SNAPSHOT</version>
+        <version>0.9.1-RELEASE</version>
     </parent>
 
     <artifactId>flint-fx-common</artifactId>
