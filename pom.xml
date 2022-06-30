@@ -59,7 +59,7 @@
         <fest-assert.version>1.4</fest-assert.version>
         <guava.version>24.1.1-jre</guava.version>
         <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
-        <itextpdf.version>5.4.5</itextpdf.version>
+        <itextpdf.version>5.5.12</itextpdf.version>
         <jackson.version>1.9.13</jackson.version>
         <javax.websocket-api.version>1.0</javax.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
