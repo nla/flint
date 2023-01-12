@@ -58,7 +58,7 @@
         <epubcheck.version>4.2.6</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
         <guava.version>24.1.1-jre</guava.version>
-        <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
+        <hadoop-client.version>2.7.0</hadoop-client.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <jackson.version>1.9.13</jackson.version>
         <javax.websocket-api.version>1.0</javax.websocket-api.version>
