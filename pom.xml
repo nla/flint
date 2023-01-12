@@ -21,13 +21,13 @@
 
         <!-- the following are different use-case specific entries to flint -->
         <!-- command line interface -->
-        <module>flint-cli</module>
+<!--        <module>flint-cli</module>-->
         <!-- javafx UI, now activated by profile-->
         <!--<module>flint-fx</module>-->
         <!-- to run on a hadoop cluster -->
-        <module>flint-hadoop</module>
+<!--        <module>flint-hadoop</module>-->
         <!-- an api to help extending a format's hadoop capabilities -->
-        <module>flint-hadoop-api</module>
+<!--        <module>flint-hadoop-api</module>-->
     </modules>
 
 	<profiles>
