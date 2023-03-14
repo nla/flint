@@ -31,6 +31,11 @@
             <artifactId>Saxon-HE</artifactId>
             <version>9.5.1-8</version>
         </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
 
         <!-- testing -->
         <dependency>

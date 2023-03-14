@@ -50,29 +50,29 @@
 
         <!-- managed versions -->
         <argparse4j.version>0.4.3</argparse4j.version>
-        <bcprov-jdk15on.version>1.49</bcprov-jdk15on.version>
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
         <commons-lang3.version>3.3.1</commons-lang3.version>
         <controlsfx.version>8.0.5</controlsfx.version>
         <cucumber.version>1.1.6</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
         <epubcheck.version>4.2.6</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
-        <guava.version>24.1.1-jre</guava.version>
-        <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
+        <guava.version>31.1-jre</guava.version>
+        <hadoop-client.version>2.10.2</hadoop-client.version>
         <itextpdf.version>5.4.5</itextpdf.version>
-        <jackson.version>1.9.13</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <javax.websocket-api.version>1.0</javax.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
-        <jetty.version>9.1.3.v20140225</jetty.version>
+        <jetty.version>9.4.51.v20230217</jetty.version>
         <jhove.version>1.12.0-SNAPSHOT</jhove.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.2</junit.version>
         <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <mrunit.version>1.0.0</mrunit.version>
         <pdfbox.version>1.8.8</pdfbox.version>
-        <reflections.version>0.9.9-RC1</reflections.version>
+        <reflections.version>0.9.12</reflections.version>
         <slf4j.version>1.7.6</slf4j.version>
         <tika-parsers.version>1.4</tika-parsers.version>
         <xz.version>1.3</xz.version>
@@ -234,8 +234,8 @@
 
             <!-- json en/de-coding -->
             <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
