@@ -30,6 +30,7 @@ import au.gov.nla.flint.hadoop.FlintHadoop;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 
 /**
@@ -81,6 +82,17 @@ public class FlintHadoopTest {
      */
     @Test
     public void testMap() throws IOException, InstantiationException, IllegalAccessException {
+        // Oh dear. So on Windows, this happens -- https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
+        // To resolve it, download the winutils binary from https://github.com/steveloughran/winutils/tree/master/hadoop-3.0.0/bin
+        // and drop it inside of a bin directory under flint-hadoop
+        // This property makes hadoop look for it at {hadoop.home.dir}/bin/winutils.exe
+        //
+        // No, I will not be committing strange exes to the repo for Windows development. Sorry.
+        //
+        // If you have the misfortune to develop under Windows, uncomment the below silliness.
+        //if (System.getProperty("os.name").toLowerCase().contains("win")) {
+        //    System.setProperty("hadoop.home.dir", Paths.get("./flint-hadoop").toAbsolutePath().toString());
+        //}
         mapDriver.withInput(new LongWritable(0), new Text(testPdf1Path));
         assertOutputMatchesRecord(mapDriver.run().get(0), testPdf1CheckResult, testPdf1Name);
     }
