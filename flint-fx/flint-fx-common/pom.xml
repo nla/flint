@@ -36,6 +36,14 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

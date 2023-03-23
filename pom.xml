@@ -23,7 +23,7 @@
         <!-- command line interface -->
         <module>flint-cli</module>
         <!-- javafx UI, now activated by profile-->
-        <!--<module>flint-fx</module>-->
+        <module>flint-fx</module>
         <!-- to run on a hadoop cluster -->
         <module>flint-hadoop</module>
         <!-- an api to help extending a format's hadoop capabilities -->
@@ -61,6 +61,7 @@
         <hadoop-client.version>3.3.4</hadoop-client.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <jackson.version>2.14.2</jackson.version>
+        <javafx.version>11</javafx.version>
         <javax.websocket-api.version>2.1.0</javax.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
         <jetty.version>9.4.51.v20230217</jetty.version>
@@ -73,7 +74,7 @@
         <mrunit.version>1.1.0</mrunit.version>
         <pdfbox.version>1.8.17</pdfbox.version>
         <reflections.version>0.10.2</reflections.version>
-        <saxon.version>12.0</saxon.version>
+        <saxon.version>9.9.1-8</saxon.version>
         <slf4j.version>2.0.6</slf4j.version>
         <tika-parsers.version>2.7.0</tika-parsers.version>
         <xz.version>1.9</xz.version>
@@ -213,6 +214,11 @@
                 <groupId>org.controlsfx</groupId>
                 <artifactId>controlsfx</artifactId>
                 <version>${controlsfx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${javafx.version}</version>
             </dependency>
 
             <!-- websocket jsr-356 api)-->
