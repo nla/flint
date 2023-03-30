@@ -23,13 +23,13 @@
         <!-- command line interface -->
         <module>flint-cli</module>
         <!-- javafx UI, now activated by profile-->
-        <module>flint-fx</module>
+        <!-- <module>flint-fx</module> -->
         <!-- to run on a hadoop cluster -->
         <module>flint-hadoop</module>
         <!-- an api to help extending a format's hadoop capabilities -->
         <module>flint-hadoop-api</module>
     </modules>
-
+<!--
 	<profiles>
 		<profile>
 			<id>jdk8plus</id>
@@ -41,7 +41,7 @@
 			</modules>
 		</profile>
 	</profiles>
-	
+	-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -61,7 +61,7 @@
         <hadoop-client.version>3.3.4</hadoop-client.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <jackson.version>2.14.2</jackson.version>
-        <javafx.version>11</javafx.version>
+        <!-- <javafx.version>11</javafx.version> -->
         <javax.websocket-api.version>2.1.0</javax.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
         <jetty.version>9.4.51.v20230217</jetty.version>
@@ -210,6 +210,7 @@
             </dependency>
 
             <!-- java-fx addons -->
+            <!--
             <dependency>
                 <groupId>org.controlsfx</groupId>
                 <artifactId>controlsfx</artifactId>
@@ -220,6 +221,7 @@
                 <artifactId>javafx-controls</artifactId>
                 <version>${javafx.version}</version>
             </dependency>
+            -->
 
             <!-- websocket jsr-356 api)-->
             <dependency>
