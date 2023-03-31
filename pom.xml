@@ -55,10 +55,10 @@
         <controlsfx.version>8.20.7</controlsfx.version>
         <cucumber.version>7.9.0</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
-        <epubcheck.version>4.2.6</epubcheck.version>
+        <epubcheck.version>5.0.0</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
         <guava.version>31.1-jre</guava.version>
-        <hadoop-client.version>3.3.4</hadoop-client.version>
+        <hadoop-client.version>3.3.5</hadoop-client.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <jackson.version>2.14.2</jackson.version>
         <!-- <javafx.version>11</javafx.version> -->
@@ -72,9 +72,10 @@
         <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
         <mrunit.version>1.1.0</mrunit.version>
+        <!-- Moving to preflight/pdfbox 2+ causes validation by uk.bl.dpt.utils.schematron.Validator to
+        spit out a saxon error complaining about invalid XML -->
         <pdfbox.version>1.8.17</pdfbox.version>
         <reflections.version>0.10.2</reflections.version>
-        <saxon.version>9.9.1-8</saxon.version>
         <slf4j.version>2.0.6</slf4j.version>
         <tika-parsers.version>2.7.0</tika-parsers.version>
         <xz.version>1.9</xz.version>
@@ -248,16 +249,20 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-
-            <dependency>
-                <groupId>org.apache.pdfbox</groupId>
-                <artifactId>pdfbox</artifactId>
-                <version>${pdfbox.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>preflight</artifactId>
                 <version>${pdfbox.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- epubcheck defunct until a new version comes out-->
             <dependency>
@@ -315,12 +320,6 @@
                 <groupId>org.tukaani</groupId>
                 <artifactId>xz</artifactId>
                 <version>${xz.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
-            <dependency>
-                <groupId>net.sf.saxon</groupId>
-                <artifactId>Saxon-HE</artifactId>
-                <version>${saxon.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.hadoop</groupId>
