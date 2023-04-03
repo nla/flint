@@ -17,8 +17,8 @@
  */
 package au.gov.nla.flint;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import au.gov.nla.flint.formats.MyDreamFormat;
 
 import java.io.File;

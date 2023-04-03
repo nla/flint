@@ -23,13 +23,13 @@
         <!-- command line interface -->
         <module>flint-cli</module>
         <!-- javafx UI, now activated by profile-->
-        <module>flint-fx</module>
+        <!-- <module>flint-fx</module> -->
         <!-- to run on a hadoop cluster -->
         <module>flint-hadoop</module>
         <!-- an api to help extending a format's hadoop capabilities -->
         <module>flint-hadoop-api</module>
     </modules>
-
+<!--
 	<profiles>
 		<profile>
 			<id>jdk8plus</id>
@@ -41,41 +41,44 @@
 			</modules>
 		</profile>
 	</profiles>
-	
+	-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
+        <java.version>11</java.version>
 
         <mainclass>au.gov.nla.flint.FLint</mainclass>
 
         <!-- managed versions -->
-        <argparse4j.version>0.4.3</argparse4j.version>
-        <bcprov-jdk15on.version>1.49</bcprov-jdk15on.version>
-        <commons-lang3.version>3.3.1</commons-lang3.version>
-        <controlsfx.version>8.0.5</controlsfx.version>
-        <cucumber.version>1.1.6</cucumber.version>
+        <argparse4j.version>0.9.0</argparse4j.version>
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <controlsfx.version>8.20.7</controlsfx.version>
+        <cucumber.version>7.9.0</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
-        <epubcheck.version>4.2.6</epubcheck.version>
+        <epubcheck.version>5.0.0</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
-        <guava.version>24.1.1-jre</guava.version>
-        <hadoop-client.version>2.0.0-mr1-cdh4.2.0</hadoop-client.version>
+        <guava.version>31.1-jre</guava.version>
+        <hadoop-client.version>3.3.5</hadoop-client.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
-        <jackson.version>1.9.13</jackson.version>
-        <javax.websocket-api.version>1.0</javax.websocket-api.version>
+        <jackson.version>2.14.2</jackson.version>
+        <!-- <javafx.version>11</javafx.version> -->
+        <javax.websocket-api.version>2.1.0</javax.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
-        <jetty.version>9.1.3.v20140225</jetty.version>
-        <jhove.version>1.12.0-SNAPSHOT</jhove.version>
-        <junit.version>4.11</junit.version>
+        <jetty.version>9.4.51.v20230217</jetty.version>
+        <jhove.version>1.26.1</jhove.version>
+        <junit.version>4.13.2</junit.version>
         <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
-        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
-        <maven-war-plugin.version>2.4</maven-war-plugin.version>
-        <mrunit.version>1.0.0</mrunit.version>
-        <pdfbox.version>1.8.8</pdfbox.version>
-        <reflections.version>0.9.9-RC1</reflections.version>
-        <slf4j.version>1.7.6</slf4j.version>
-        <tika-parsers.version>1.4</tika-parsers.version>
-        <xz.version>1.3</xz.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
+        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+        <mrunit.version>1.1.0</mrunit.version>
+        <!-- Moving to preflight/pdfbox 2+ causes validation by uk.bl.dpt.utils.schematron.Validator to
+        spit out a saxon error complaining about invalid XML -->
+        <pdfbox.version>1.8.17</pdfbox.version>
+        <reflections.version>0.10.2</reflections.version>
+        <slf4j.version>2.0.6</slf4j.version>
+        <tika-parsers.version>2.7.0</tika-parsers.version>
+        <xz.version>1.9</xz.version>
     </properties>
 
     <distributionManagement>
@@ -151,19 +154,19 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>info.cukes</groupId>
+                <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-core</artifactId>
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>info.cukes</groupId>
+                <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-java</artifactId>
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>info.cukes</groupId>
+                <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-junit</artifactId>
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
@@ -208,11 +211,18 @@
             </dependency>
 
             <!-- java-fx addons -->
+            <!--
             <dependency>
                 <groupId>org.controlsfx</groupId>
                 <artifactId>controlsfx</artifactId>
                 <version>${controlsfx.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+            -->
 
             <!-- websocket jsr-356 api)-->
             <dependency>
@@ -234,21 +244,25 @@
 
             <!-- json en/de-coding -->
             <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
-
-            <dependency>
-                <groupId>org.apache.pdfbox</groupId>
-                <artifactId>pdfbox</artifactId>
-                <version>${pdfbox.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>preflight</artifactId>
                 <version>${pdfbox.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- epubcheck defunct until a new version comes out-->
             <dependency>
@@ -257,8 +271,8 @@
                 <version>${epubcheck.version}</version>
             </dependency>
             <dependency>
-                <groupId>edu.harvard.hul.ois</groupId>
-                <artifactId>jhove</artifactId>
+                <groupId>org.openpreservation.jhove</groupId>
+                <artifactId>jhove-core</artifactId>
                 <version>${jhove.version}</version>
             </dependency>
             <!-- note that to use jhove2 a different method of making a single jar
@@ -291,7 +305,13 @@
             <!-- end of bouncycastle libs -->
             <dependency>
                 <groupId>org.apache.tika</groupId>
-                <artifactId>tika-parsers</artifactId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika-parsers.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers-standard-package</artifactId>
                 <version>${tika-parsers.version}</version>
                 <scope>compile</scope>
             </dependency>
@@ -300,12 +320,6 @@
                 <groupId>org.tukaani</groupId>
                 <artifactId>xz</artifactId>
                 <version>${xz.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
-            <dependency>
-                <groupId>net.sf.saxon</groupId>
-                <artifactId>Saxon-HE</artifactId>
-                <version>9.8.0-8</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.hadoop</groupId>

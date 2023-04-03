@@ -27,9 +27,9 @@
             <artifactId>hadoop-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>Saxon-HE</artifactId>
-            <version>9.5.1-8</version>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
         </dependency>
 
         <!-- testing -->

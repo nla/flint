@@ -55,7 +55,7 @@ public class EpubCheckWrapper {
             try (PrintWriter pw = new PrintWriter(reportFile)) {
                 report = new XmlReportWithMessageIds(pw, file.getName(), EpubCheck.version());
                 EpubCheck check = new EpubCheck(file, report);
-                check.validate();
+                check.doValidate();
                 report.generate();
             }
             LOGGER.info("Generated EpubCheck report at {}");

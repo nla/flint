@@ -18,6 +18,7 @@ package au.gov.nla.flint.wrappers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import edu.harvard.hul.ois.jhove.App;
 import edu.harvard.hul.ois.jhove.JhoveBase;
 import edu.harvard.hul.ois.jhove.JhoveException;
 import edu.harvard.hul.ois.jhove.handler.XmlHandler;
+import org.openpreservation.jhove.ReleaseDetails;
 
 /**
  * This class wraps and hides Jhove - a call to isValid() will return true or false if
@@ -52,7 +54,10 @@ public class Jhove1Wrapper {
         } catch (JhoveException e1) {
             LOGGER.warn("Caught exception: {}", e1);
         }
-        app = new App(JhoveBase._name, JhoveBase._release, JhoveBase.DATE, "", "");
+		ReleaseDetails rd = ReleaseDetails.getInstance();
+		Date rd_date =  rd.getBuildDate();
+		int[] rd_date_arr = {rd_date.getYear(), rd_date.getMonth(), rd_date.getDay()};
+        app = new App(JhoveBase._name, rd.getVersion(), rd_date_arr, "", "");
         handler = new XmlHandler();
         //try {
         //  jhove.init();

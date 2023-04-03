@@ -17,10 +17,6 @@
         </dependency>
 
         <!-- third party tools to be wrapped -->
-        <dependency>
-			<groupId>org.apache.pdfbox</groupId>
-			<artifactId>pdfbox</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>preflight</artifactId>
@@ -31,8 +27,8 @@
 		</dependency>
 
 		<dependency>
-            <groupId>edu.harvard.hul.ois</groupId>
-			<artifactId>jhove</artifactId>
+            <groupId>org.openpreservation.jhove</groupId>
+			<artifactId>jhove-core</artifactId>
 		</dependency>
 		<!-- note that to use jhove2 a different method of making a single jar
 			is required, or just use the standalone jar and dependencies -->
@@ -55,7 +51,11 @@
 		<!-- end of bouncycastle libs -->
 		<dependency>
 			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-parsers</artifactId>
+			<artifactId>tika-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers-standard-package</artifactId>
 		</dependency>
 		<!-- this is here to stop tika complaining about noclassdeffound see: https://issues.apache.org/jira/browse/COMPRESS-221 -->
 		<dependency>
