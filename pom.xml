@@ -53,7 +53,7 @@
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <controlsfx.version>8.20.7</controlsfx.version>
-        <cucumber.version>7.9.0</cucumber.version>
+        <cucumber.version>7.11.2</cucumber.version>
         <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
         <epubcheck.version>5.0.0</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
@@ -62,21 +62,21 @@
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <jackson.version>2.14.2</jackson.version>
         <!-- <javafx.version>11</javafx.version> -->
-        <javax.websocket-api.version>2.1.0</javax.websocket-api.version>
+        <jakarta.websocket-api.version>2.1.0</jakarta.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
         <jetty.version>9.4.51.v20230217</jetty.version>
         <jhove.version>1.26.1</jhove.version>
         <junit.version>4.13.2</junit.version>
         <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
         <mrunit.version>1.1.0</mrunit.version>
         <!-- Moving to preflight/pdfbox 2+ causes validation by uk.bl.dpt.utils.schematron.Validator to
         spit out a saxon error complaining about invalid XML -->
         <pdfbox.version>1.8.17</pdfbox.version>
         <reflections.version>0.10.2</reflections.version>
-        <slf4j.version>2.0.6</slf4j.version>
+        <slf4j.version>2.0.7</slf4j.version>
         <tika-parsers.version>2.7.0</tika-parsers.version>
         <xz.version>1.9</xz.version>
     </properties>
@@ -226,9 +226,9 @@
 
             <!-- websocket jsr-356 api)-->
             <dependency>
-                <groupId>javax.websocket</groupId>
-                <artifactId>javax.websocket-api</artifactId>
-                <version>${javax.websocket-api.version}</version>
+                <groupId>jakarta.websocket</groupId>
+                <artifactId>jakarta.websocket-api</artifactId>
+                <version>${jakarta.websocket-api.version}</version>
             </dependency>
             <!-- jetty implementation of server side jsr-356 -->
             <dependency>
