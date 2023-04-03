@@ -1,3 +1,3 @@
 nlaBuild steps: this,
     applicationName: "flint",
-            jdk: 'JDK 8'
+            jdk: 'JDK 11'
