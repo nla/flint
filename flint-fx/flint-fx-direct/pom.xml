@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>au.gov.nla</groupId>
 		<artifactId>flint-fx</artifactId>
-		<version>0.9.1-RELEASE</version>
+		<version>0.9.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>flint-fx-direct</artifactId>
