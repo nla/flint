@@ -67,7 +67,7 @@
         <jetty.version>9.4.51.v20230217</jetty.version>
         <jhove.version>1.26.1</jhove.version>
         <junit.version>4.13.2</junit.version>
-        <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.3.2</maven-war-plugin.version>

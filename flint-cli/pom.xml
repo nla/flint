@@ -10,7 +10,6 @@
     <artifactId>flint-cli</artifactId>
 
     <properties>
-        <java.version>1.7</java.version>
         <mainclass>au.gov.nla.flint.CoreApp</mainclass>
     </properties>
 
