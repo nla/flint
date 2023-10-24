@@ -65,50 +65,10 @@ public class SpecificDrmChecks extends TimedTask {
             logger.debug(cc.get("checkDRMPDFBoxAbsolute").toString());
             cc.add(new CheckCheck("checkDRMPDFBoxGranular", !pdfBoxWrapper.hasDRMGranular(contentFile), null));
             logger.debug(cc.get("checkDRMPDFBoxGranular").toString());
-            cc.add(new CheckCheck("checkDRMNaiive", !checkDRMNaiive(contentFile), null));
-            logger.debug(cc.get("checkDRMNaiive").toString());
             cc.add(new CheckCheck("checkDRM_iText", !new iTextWrapper().hasDRM(contentFile), null));
             logger.debug(cc.get("checkDRM_iText").toString());
             cmap.put(cc.getName(), cc);
         }
         return cmap;
-    }
-
-    /**
-     * Search for /encrypt in file
-     * NOTE: this might be found in content but if we're being conservative it might be useful
-     * @param pStream input-stream
-     * @return true if /encrypt found
-     */
-    private static boolean checkDRMNaiive(InputStream pStream) {
-
-        Scanner scanner = new Scanner(pStream);
-
-        //just try and find the first occurrence of /encrypt (note that this might actually be in the content)
-        //scanner.findWithinHorizon("/[rR][oO][oO][tT]", 0);
-        String found = scanner.findWithinHorizon("/[eE][nN][cC][rR][yY][pP][tT]", 0);
-
-        //System.out.println("Scanner found: "+(found!=null?"yes":"no"));
-
-        boolean ret = found!=null && found.length() > 0;
-
-        scanner.close();
-
-        return ret;
-    }
-
-    /**
-     * Search for /encrypt in file
-     * NOTE: this might be found in content but if we're being conservative it might be useful
-     * @param contentFile input-file
-     * @return true if /encrypt is found
-     */
-    private boolean checkDRMNaiive(File contentFile) {
-        try {
-            return checkDRMNaiive(new FileInputStream(contentFile));
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
-        }
-        return false;
     }
 }
