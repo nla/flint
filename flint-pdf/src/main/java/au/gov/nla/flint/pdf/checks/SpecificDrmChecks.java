@@ -23,7 +23,6 @@ import au.gov.nla.flint.checks.CheckCategory;
 import au.gov.nla.flint.checks.CheckCheck;
 import au.gov.nla.flint.checks.TimedTask;
 import au.gov.nla.flint.wrappers.PDFBoxWrapper;
-import au.gov.nla.flint.wrappers.iTextWrapper;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,10 +62,6 @@ public class SpecificDrmChecks extends TimedTask {
             CheckCategory cc = new CheckCategory(FixedCategories.NO_DRM.toString());
             cc.add(new CheckCheck("checkDRMPDFBoxAbsolute", !pdfBoxWrapper.hasDRM(contentFile), null));
             logger.debug(cc.get("checkDRMPDFBoxAbsolute").toString());
-            cc.add(new CheckCheck("checkDRMPDFBoxGranular", !pdfBoxWrapper.hasDRMGranular(contentFile), null));
-            logger.debug(cc.get("checkDRMPDFBoxGranular").toString());
-            cc.add(new CheckCheck("checkDRM_iText", !new iTextWrapper().hasDRM(contentFile), null));
-            logger.debug(cc.get("checkDRM_iText").toString());
             cmap.put(cc.getName(), cc);
         }
         return cmap;

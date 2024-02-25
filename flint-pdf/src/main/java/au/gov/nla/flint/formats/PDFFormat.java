@@ -41,7 +41,7 @@ import java.util.TreeSet;
 
 /**
  * PDF implementation of a Format. It uses schematron-based policy validation of apache preflight
- * and some custom add-on checks including jhove(1) and itext.
+ * and some custom add-on checks including jhove(1).
  *
  * Useful reads on the topic:
  * - http://wiki.mobileread.com/wiki/DRM
@@ -71,14 +71,12 @@ public class PDFFormat extends PolicyAware implements Format, HadoopFormat {
             add("checkDRMPDFBoxAbsolute");
             add("checkDRMPDFBoxGranular");
             add("checkDRMNaiive");
-            add("checkDRM_iText");
         }};
         final Map<String, Set<String>> noDRMMap = new TreeMap<String, Set<String>>() {{
             put(FixedCategories.NO_DRM.toString(), noDRM);
         }};
         final Set<String> wellFormed = new TreeSet<String>() {{
             add("isValidPDFBox");
-            add("isValid_iText");
             add("isValidJhove1");
         }};
         final Map<String, Set<String>> wellFormedMap = new TreeMap<String, Set<String>>() {{

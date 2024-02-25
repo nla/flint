@@ -30,7 +30,6 @@ In addition to Flint's internal logic, Flint offers wrappers around a variety of
 * Apache Tika
 * Calibre
 * EPUBCheck 
-* iText - note that this library is AGPL3 licensed
 
 Each wrapper neatly encapsulates the code required to use each dependency, removing complexity and simplifying calls from the core.
 

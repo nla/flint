@@ -20,7 +20,6 @@ import java.io.File;
 
 import au.gov.nla.flint.wrappers.PDFBoxWrapper;
 import au.gov.nla.flint.wrappers.TikaWrapper;
-import au.gov.nla.flint.wrappers.iTextWrapper;
 
 /**
  * A class that will convert from PDF to text using a variety of different tools
@@ -43,12 +42,6 @@ public class PDFToText {
 		if(new TikaWrapper().getMimetype(pOriginal).toLowerCase().contains("pdf")) {
 			//extract text
 			ret = new PDFBoxWrapper().extractTextFromPDF(pOriginal, pText, true);
-			
-			if(!ret) {
-				//try and extract text using iText as PDFBox encountered an error
-				ret = new iTextWrapper().extractTextFromPDF(pOriginal, pText, true);
-			}
-			
 		}
 		return ret;
 	}
