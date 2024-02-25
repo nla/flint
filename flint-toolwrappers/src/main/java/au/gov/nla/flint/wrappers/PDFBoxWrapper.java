@@ -17,18 +17,19 @@
  */
 package au.gov.nla.flint.wrappers;
 
+import org.apache.commons.compress.PasswordRequiredException;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.io.RandomAccess;
-import org.apache.pdfbox.io.RandomAccessFile;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
-import org.apache.pdfbox.pdmodel.encryption.PDEncryptionDictionary;
+import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.preflight.PreflightDocument;
 import org.apache.pdfbox.preflight.ValidationResult;
 import org.apache.pdfbox.preflight.exception.SyntaxValidationException;
 import org.apache.pdfbox.preflight.parser.PreflightParser;
 import org.apache.pdfbox.preflight.parser.XmlResultParser;
-import org.apache.pdfbox.util.PDFTextStripper;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -61,11 +62,11 @@ public class PDFBoxWrapper {
     public PDFBoxWrapper() {}
 
     /**
-     * As preflight is used more than once for different puroposes the result
+     * As preflight is used more than once for different purposes the result
      * shall be cached for performance reasons.
      */
     private class CachingXmlResultParser extends XmlResultParser {
-        public Element validate (Document rdocument, DataSource source) throws IOException {
+        public Element validate (Document rdocument, File source) throws IOException {
             synchronized (this.getClass()) {
                 if (pseudoCache.containsKey(source.getName())) {
                     // can be null, which means it's not valid
@@ -86,16 +87,7 @@ public class PDFBoxWrapper {
             PreflightDocument document = null;
             try {
                 LOGGER.debug("Beginning the preflight validation.. of {}", source.getName());
-                PreflightParser parser = new PreflightParser(source);
-                parser.parse();
-                LOGGER.debug("get-preflight-document");
-                document = parser.getPreflightDocument();
-                LOGGER.debug("doc.validate");
-                document.validate();
-                LOGGER.debug("get-spec-get-fname");
-                pdfType = document.getSpecification().getFname();
-                LOGGER.debug("get-result");
-                result = document.getResult();
+                result = PreflightParser.validate(source);
             } catch (SyntaxValidationException e) {
                 result = e.getResult();
             } finally {
@@ -129,7 +121,7 @@ public class PDFBoxWrapper {
      * @throws TransformerException 
      */
     public ByteArrayOutputStream preflightToXml(File pFile) throws IOException, TransformerException {
-        Element result = parser.validate(new FileDataSource(pFile));
+        Element result = parser.validate(pFile);
         LOGGER.debug("generating xml from preflight generated element for {}", pFile);
         Document doc = result.getOwnerDocument();
         doc.appendChild(result);
@@ -149,69 +141,22 @@ public class PDFBoxWrapper {
      */
     public boolean isValid(File pFile) {
         try {
-            if (parser.validate(new FileDataSource(pFile)) == null) {
+            if (parser.validate(pFile) == null) {
                 return false;
             }
         } catch (IOException e) {
-            LOGGER.warn("IOException leads to invalidity: {}", e);
+            LOGGER.warn("IOException leads to invalidity", e);
             return false;
         } catch (IllegalArgumentException e) {
-            LOGGER.warn("IllegalArgumentException leads to invalidity: {}", e);
+            LOGGER.warn("IllegalArgumentException leads to invalidity", e);
             return false;
         } catch (Exception e) {
-            LOGGER.warn("Exception leads to invalidity: {}", e);
+            LOGGER.warn("Exception leads to invalidity", e);
             return false;
         }
 
-        // if preflight passes the file then try and extract the text from the file
-        // this should be more robust at finding errors than load/save but it's
-        // still not ideal
-        File pTemp = null;
-        try {
-            pTemp = File.createTempFile("flint-temp-", ".pdfbox.txt");
-            pTemp.deleteOnExit();
-        } catch (IOException e) {
-            return false;
-        } finally {
-            if (pTemp != null) pTemp.delete();
-        }
         return true;
-        //return extractTextFromPDF(pFile, pTemp, true);
     }
-
-	/**
-	 * Loads and saves a PDF
-	 * @param pFile PDF file to load
-	 * @return whether the file loads and saves successfully or not
-	 */
-	public boolean loadSavePDF(File pFile) {
-		boolean ret = false;
-
-		File temp = null;
-		try {
-
-			// Note that this test passes files that fail to open in Acrobat
-			// The files are saved with the same errors as the original
-			// i.e. this is not an effective test for validity
-
-			PDFParser parser = new PDFParser(new FileInputStream(pFile));
-			parser.parse();
-			temp = File.createTempFile("flint-temp-"+pFile.getName()+"-", ".pdf");
-			parser.getPDDocument().save(temp);
-			parser.getDocument().close();
-			temp.deleteOnExit();
-			ret = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			// See comments in https://issues.apache.org/jira/browse/PDFBOX-1757
-			// PDFBox state that these files have errors and their parser is correct
-			// The only way to find out that the parser doesn't like it is to catch
-			// a general Exception.
-		} finally {
-		    if (temp != null) temp.delete();
-		}
-		return ret;
-	}
 
 	/**
 	 * Check if a PDF file has DRM or not
@@ -221,19 +166,16 @@ public class PDFBoxWrapper {
 	public boolean hasDRM(File pFile) {
 		boolean ret = false;
 		
-		File tmp = null;
 		try {
 			System.setProperty("org.apache.pdfbox.baseParser.pushBackSize", "1024768");
-			// NOTE: we use loadNonSeq here as it is the latest parser
-			// load() and parser.parse() have hung on test files
-			tmp = File.createTempFile("flint-", ".tmp");
-			tmp.deleteOnExit();
-			RandomAccess scratchFile = new RandomAccessFile(tmp, "rw");
-			PDDocument doc = PDDocument.loadNonSeq(new FileInputStream(pFile), scratchFile);
+			PDDocument doc = Loader.loadPDF(pFile);
 			ret = doc.isEncrypted();
 			doc.close();
 
-		} catch(IOException e) {
+		} catch (InvalidPasswordException e) {
+			ret = true;
+		}
+		catch(IOException e) {
 
 			// This may occur when a suitable security handler cannot be found
 			if(e.getMessage().contains("BadSecurityHandlerException")) {
@@ -254,119 +196,54 @@ public class PDFBoxWrapper {
 			// DRM or not.  Return false and hope it is detected elsewhere.
 
 			ret = false;
-		} finally {
-		    if (tmp != null) tmp.delete();
 		}
 		return ret;
 	}
 
-	/**
-	 * Check for encryption with Apache PDFBox
-	 * -> query the encryption dictionary (might allow more granular checks of protection)
-	 * @param pPDF pdf file to check
-	 * @return whether or not the file has DRM
-	 */
-	public boolean hasDRMGranular(File pPDF) {
 
-		boolean ret = false;
-
-		File tmp = null;
-		try {
-			System.setProperty("org.apache.pdfbox.baseParser.pushBackSize", "1024768");
-			// NOTE: we use loadNonSeq here as it is the latest parser
-			// load() and parser.parse() have hung on test files
-			tmp = File.createTempFile("flint-", ".tmp");
-			tmp.deleteOnExit();
-			RandomAccess scratchFile = new RandomAccessFile(tmp, "rw");
-			PDDocument doc = PDDocument.loadNonSeq(new FileInputStream(pPDF), scratchFile);
-
-			PDEncryptionDictionary dict = doc.getEncryptionDictionary();
-			if(dict!=null) {
-
-				//print encryption dictionary
-//				for(COSName key:dict.keySet()) {
-//					System.out.print(key.getName());
-//					String value = dict.getString(key);
-//					if(value!=null){
-//						System.out.println(": "+value);
-//					} else {
-//						System.out.println(": "+dict.getLong(key));
-//					}
-//				}
-
-				//this feaure in pdfbox is currently broken, see: https://issues.apache.org/jira/browse/PDFBOX-1651
-				//AccessPermission perms = parser.getPDDocument().getCurrentAccessPermission();
-				//this is a work around; creating a new object from the data
-				AccessPermission perms = new AccessPermission(dict.getPermissions());//.getInt("P"));
-
-				boolean debug = true;
-
-				if(debug) {
-
-					System.out.println("canAssembleDocument()        : "+perms.canAssembleDocument());
-					System.out.println("canExtractContent()          : "+perms.canExtractContent());
-					System.out.println("canExtractForAccessibility() : "+perms.canExtractForAccessibility());
-					System.out.println("canFillInForm()              : "+perms.canFillInForm());
-					System.out.println("canModify()                  : "+perms.canModify());
-					System.out.println("canModifyAnnotations()       : "+perms.canModifyAnnotations());
-					System.out.println("canPrint()                   : "+perms.canPrint());
-					System.out.println("canPrintDegraded()           : "+perms.canPrintDegraded());
-					System.out.println("isOwnerPermission()          : "+perms.isOwnerPermission());
-					System.out.println("isReadOnly()                 : "+perms.isReadOnly());
-
-				}
-			}
-
-			doc.close();
-
-		} catch (Exception e) {
-           LOGGER.warn("Exception while doing granular DRM checks leads to invalidity: {}", e);
-		} finally {
-		    if (tmp != null) tmp.delete();
-		}
-
-		return ret;
-	}
-
-	/**
-	 * Extracts text from a PDF.  Note that Tika uses PDFBox so we will just use the library directly and avoid waiting for
-	 * Tika to use the latest version.
-	 * Inspired by PDFBox's ExtractText.java
-	 * @param pFile input file
-	 * @param pOutput output file
-	 * @param pOverwrite whether or not to overwrite an existing output file
-	 * @return true if converted ok, otherwise false
-	 */
-	public boolean extractTextFromPDF(File pFile, File pOutput, boolean pOverwrite) {
-		if(pOutput.exists()&(!pOverwrite)) return false;
-        PDDocument doc = null;
-        PrintWriter out = null;
-		try {
-			PDFTextStripper ts = new PDFTextStripper();
-			out = new PrintWriter(new FileWriter(pOutput));
-			boolean skipErrors = true;
-			doc = PDDocument.load(pFile.toURI().toURL(), skipErrors);
-			ts.setForceParsing(skipErrors);
-			ts.writeText(doc, out);
-			// TODO: extract text from embedded files?
-			return true;
-		} catch (OutOfMemoryError e) {
-            LOGGER.error("out of memory error while trying to extract text from file {}! : {}", pFile.getName(), e);
-            System.gc();
-        } catch (Exception e) {
-			// TODO Auto-generated catch block
-            LOGGER.error("caught Exception: {}", e);
-			e.printStackTrace();
-		} finally {
-            try {
-                out.close();
-                if (doc != null) doc.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+  /**
+   * Extracts text from a PDF.  Note that Tika uses PDFBox so we will just use the library directly and avoid
+   * waiting for Tika to use the latest version. Inspired by PDFBox's ExtractText.java
+   *
+   * @param pFile      input file
+   * @param pOutput    output file
+   * @param pOverwrite whether or not to overwrite an existing output file
+   * @return true if converted ok, otherwise false
+   */
+  public boolean extractTextFromPDF(File pFile, File pOutput, boolean pOverwrite) {
+    if (pOutput.exists() && (!pOverwrite)) {
+      return false;
+    }
+    PDDocument doc = null;
+    PrintWriter out = null;
+    try {
+      PDFTextStripper ts = new PDFTextStripper();
+      out = new PrintWriter(new FileWriter(pOutput));
+      doc = Loader.loadPDF(pFile);
+      ts.writeText(doc, out);
+      // TODO: extract text from embedded files?
+      return true;
+    } catch (OutOfMemoryError e) {
+      LOGGER.error("out of memory error while trying to extract text from file {}! : {}", pFile.getName(), e);
+      System.gc();
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      LOGGER.error("caught Exception: {}", e);
+      e.printStackTrace();
+    } finally {
+      try {
+        if (out != null) {
+          out.close();
         }
-		return false;
+        if (doc != null) {
+          doc.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return false;
 
-	}
+  }
 
 }

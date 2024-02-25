@@ -26,7 +26,6 @@ import au.gov.nla.flint.checks.TimedTask;
 import au.gov.nla.flint.wrappers.CalibreWrapper;
 import au.gov.nla.flint.wrappers.Jhove1Wrapper;
 import au.gov.nla.flint.wrappers.PDFBoxWrapper;
-import au.gov.nla.flint.wrappers.iTextWrapper;
 
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -66,9 +65,6 @@ public class Wellformedness extends TimedTask {
                 cc.add(new CheckCheck("isValidPDFBox", new PDFBoxWrapper().isValid(contentFile), null));
                 logger.debug(cc.get("isValidPDFBox").toString());
             }
-
-            cc.add(new CheckCheck("isValid_iText", new iTextWrapper().isValid(contentFile), null));
-            logger.debug(cc.get("isValid_iText").toString());
 
             CalibreWrapper calibreWrapper = new CalibreWrapper();
             if (calibreWrapper.calibreIsAvailable()) {
