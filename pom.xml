@@ -29,19 +29,7 @@
         <!-- an api to help extending a format's hadoop capabilities -->
         <module>flint-hadoop-api</module>
     </modules>
-<!--
-	<profiles>
-		<profile>
-			<id>jdk8plus</id>
-			<activation>
-				<jdk>1.8</jdk>
-			</activation>
-			<modules>
-				<module>flint-fx</module>
-			</modules>
-		</profile>
-	</profiles>
-	-->
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -209,20 +197,6 @@
                 <version>${slf4j.version}</version>
             </dependency>
 
-            <!-- java-fx addons -->
-            <!--
-            <dependency>
-                <groupId>org.controlsfx</groupId>
-                <artifactId>controlsfx</artifactId>
-                <version>${controlsfx.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-controls</artifactId>
-                <version>${javafx.version}</version>
-            </dependency>
-            -->
-
             <!-- websocket jsr-356 api)-->
             <dependency>
                 <groupId>jakarta.websocket</groupId>
@@ -274,10 +248,6 @@
                 <artifactId>jhove-core</artifactId>
                 <version>${jhove.version}</version>
             </dependency>
-            <!-- note that to use jhove2 a different method of making a single jar
-                is required, or just use the standalone jar and dependencies -->
-            <!-- <dependency> <groupId>org.jhove2</groupId> <artifactId>jhove2</artifactId>
-                <version>2.1.0</version> </dependency> -->
             <dependency>
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>

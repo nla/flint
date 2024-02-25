@@ -17,20 +17,14 @@
  */
 package au.gov.nla.flint.pdf.checks;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import au.gov.nla.flint.checks.CheckCategory;
 import au.gov.nla.flint.checks.CheckCheck;
 import au.gov.nla.flint.checks.TimedTask;
 import au.gov.nla.flint.wrappers.PDFBoxWrapper;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.LinkedHashMap;
-import java.util.Scanner;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper around additional specific DRM checks that produces an error message

@@ -145,13 +145,13 @@ public class PDFBoxWrapper {
                 return false;
             }
         } catch (IOException e) {
-            LOGGER.warn("IOException leads to invalidity: {}", e);
+            LOGGER.warn("IOException leads to invalidity", e);
             return false;
         } catch (IllegalArgumentException e) {
-            LOGGER.warn("IllegalArgumentException leads to invalidity: {}", e);
+            LOGGER.warn("IllegalArgumentException leads to invalidity", e);
             return false;
         } catch (Exception e) {
-            LOGGER.warn("Exception leads to invalidity: {}", e);
+            LOGGER.warn("Exception leads to invalidity", e);
             return false;
         }
 
@@ -201,45 +201,49 @@ public class PDFBoxWrapper {
 	}
 
 
-
-	/**
-	 * Extracts text from a PDF.  Note that Tika uses PDFBox so we will just use the library directly and avoid waiting for
-	 * Tika to use the latest version.
-	 * Inspired by PDFBox's ExtractText.java
-	 * @param pFile input file
-	 * @param pOutput output file
-	 * @param pOverwrite whether or not to overwrite an existing output file
-	 * @return true if converted ok, otherwise false
-	 */
-	public boolean extractTextFromPDF(File pFile, File pOutput, boolean pOverwrite) {
-		if(pOutput.exists()&(!pOverwrite)) return false;
-        PDDocument doc = null;
-        PrintWriter out = null;
-		try {
-			PDFTextStripper ts = new PDFTextStripper();
-			out = new PrintWriter(new FileWriter(pOutput));
-			boolean skipErrors = true;
-			doc = Loader.loadPDF(pFile);
-			ts.writeText(doc, out);
-			// TODO: extract text from embedded files?
-			return true;
-		} catch (OutOfMemoryError e) {
-            LOGGER.error("out of memory error while trying to extract text from file {}! : {}", pFile.getName(), e);
-            System.gc();
-        } catch (Exception e) {
-			// TODO Auto-generated catch block
-            LOGGER.error("caught Exception: {}", e);
-			e.printStackTrace();
-		} finally {
-            try {
-                out.close();
-                if (doc != null) doc.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+  /**
+   * Extracts text from a PDF.  Note that Tika uses PDFBox so we will just use the library directly and avoid
+   * waiting for Tika to use the latest version. Inspired by PDFBox's ExtractText.java
+   *
+   * @param pFile      input file
+   * @param pOutput    output file
+   * @param pOverwrite whether or not to overwrite an existing output file
+   * @return true if converted ok, otherwise false
+   */
+  public boolean extractTextFromPDF(File pFile, File pOutput, boolean pOverwrite) {
+    if (pOutput.exists() && (!pOverwrite)) {
+      return false;
+    }
+    PDDocument doc = null;
+    PrintWriter out = null;
+    try {
+      PDFTextStripper ts = new PDFTextStripper();
+      out = new PrintWriter(new FileWriter(pOutput));
+      doc = Loader.loadPDF(pFile);
+      ts.writeText(doc, out);
+      // TODO: extract text from embedded files?
+      return true;
+    } catch (OutOfMemoryError e) {
+      LOGGER.error("out of memory error while trying to extract text from file {}! : {}", pFile.getName(), e);
+      System.gc();
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      LOGGER.error("caught Exception: {}", e);
+      e.printStackTrace();
+    } finally {
+      try {
+        if (out != null) {
+          out.close();
         }
-		return false;
+        if (doc != null) {
+          doc.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return false;
 
-	}
+  }
 
 }
