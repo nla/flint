@@ -61,7 +61,7 @@
         <mrunit.version>1.1.0</mrunit.version>
         <!-- Moving to preflight/pdfbox 2+ causes validation by uk.bl.dpt.utils.schematron.Validator to
         spit out a saxon error complaining about invalid XML -->
-        <pdfbox.version>3.0.1</pdfbox.version>
+        <pdfbox.version>3.0.2</pdfbox.version>
         <reflections.version>0.10.2</reflections.version>
         <slf4j.version>2.0.7</slf4j.version>
         <tika-parsers.version>2.7.0</tika-parsers.version>
