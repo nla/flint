@@ -26,7 +26,7 @@
 
        <!-- utility collection by the DBT@BL -->
         <dependency>
-            <groupId>uk.bl.dpt</groupId>
+            <groupId>au.gov.nla</groupId>
             <artifactId>dptutils</artifactId>
         </dependency>
         <!-- other utilities -->
@@ -66,10 +66,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
         </dependency>
     </dependencies>
 

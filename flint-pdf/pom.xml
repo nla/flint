@@ -16,16 +16,7 @@
             <artifactId>flint-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>flint-hadoop-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-        </dependency>
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>

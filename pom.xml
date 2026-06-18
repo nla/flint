@@ -22,50 +22,40 @@
         <!-- the following are different use-case specific entries to flint -->
         <!-- command line interface -->
         <module>flint-cli</module>
-        <!-- javafx UI, now activated by profile-->
-        <!-- <module>flint-fx</module> -->
-        <!-- to run on a hadoop cluster -->
-        <module>flint-hadoop</module>
-        <!-- an api to help extending a format's hadoop capabilities -->
-        <module>flint-hadoop-api</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
+        <java.version>25</java.version>
 
         <mainclass>au.gov.nla.flint.FLint</mainclass>
 
         <!-- managed versions -->
         <argparse4j.version>0.9.0</argparse4j.version>
-        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <controlsfx.version>8.20.7</controlsfx.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
         <cucumber.version>7.11.2</cucumber.version>
-        <dptutils.version>0.0.3-SNAPSHOT</dptutils.version>
-        <epubcheck.version>5.0.0</epubcheck.version>
+        <dptutils.version>1.0.0</dptutils.version>
+        <epubcheck.version>5.3.0</epubcheck.version>
         <fest-assert.version>1.4</fest-assert.version>
-        <guava.version>31.1-jre</guava.version>
-        <hadoop-client.version>3.3.5</hadoop-client.version>
+        <guava.version>33.6.0-jre</guava.version>
         <jackson.version>2.14.2</jackson.version>
-        <!-- <javafx.version>11</javafx.version> -->
         <jakarta.websocket-api.version>2.1.0</jakarta.websocket-api.version>
         <jboss-websocket-api_1.0_spec>1.0.0.Final</jboss-websocket-api_1.0_spec>
         <jetty.version>9.4.51.v20230217</jetty.version>
         <jhove.version>1.26.1</jhove.version>
         <junit.version>4.13.2</junit.version>
-        <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+        <maven-war-plugin.version>3.5.1</maven-war-plugin.version>
         <mrunit.version>1.1.0</mrunit.version>
         <!-- Moving to preflight/pdfbox 2+ causes validation by uk.bl.dpt.utils.schematron.Validator to
         spit out a saxon error complaining about invalid XML -->
         <pdfbox.version>3.0.2</pdfbox.version>
         <reflections.version>0.10.2</reflections.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <tika-parsers.version>2.7.0</tika-parsers.version>
-        <xz.version>1.9</xz.version>
+        <tika-parsers.version>3.3.1</tika-parsers.version>
+        <xz.version>1.12</xz.version>
     </properties>
 
     <distributionManagement>
@@ -116,7 +106,7 @@
         <dependencies>
             <!-- utility collection by the DBT@BL -->
             <dependency>
-                <groupId>uk.bl.dpt</groupId>
+                <groupId>au.gov.nla</groupId>
                 <artifactId>dptutils</artifactId>
                 <version>${dptutils.version}</version>
             </dependency>
@@ -156,13 +146,6 @@
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-junit</artifactId>
                 <version>${cucumber.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.mrunit</groupId>
-                <artifactId>mrunit</artifactId>
-                <version>${mrunit.version}</version>
-                <classifier>hadoop2</classifier>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -265,12 +248,6 @@
                 <groupId>org.tukaani</groupId>
                 <artifactId>xz</artifactId>
                 <version>${xz.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-client</artifactId>
-                <version>${hadoop-client.version}</version>
-                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

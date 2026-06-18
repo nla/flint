@@ -12,7 +12,7 @@
 
         <!-- utility collection by the DBT@BL -->
         <dependency>
-            <groupId>uk.bl.dpt</groupId>
+            <groupId>au.gov.nla</groupId>
             <artifactId>dptutils</artifactId>
         </dependency>
 

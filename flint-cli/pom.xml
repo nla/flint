@@ -73,13 +73,6 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-        <!-- TODO: need hadoop for the cucumber tests; this shouldn't be like that! -->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- testing -->
         <dependency>
             <groupId>junit</groupId>

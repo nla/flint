@@ -18,7 +18,7 @@ FLint CheckResults come with a three-level validation approach:
 | result only 'passed' if all categories | result only 'passed' if all   | result reflects code or    |
 | pass as well                           | checks pass as well           | policy logic               |
 
-## TimedValidation and -Tasks: what if the validation process fails on a currupt file?
+## TimedValidation and -Tasks: what if the validation process fails on a corrupt file?
 Using third party software for validation on top of potentially very corrupt files can't exclude the possibility of it crashing very badly.
 A Format implementation has the option to perform the communication with the different bits of validation logic via a TimedValidation, the actual validation code wrapped in subclasses of the abstract class TimedTask. This guarantees that any occurring unexpected exception is being caught and doesn't cause the whole thing to crash. Also, a timeout can be set to avoid infinitive loops.
 This functionality is specifically important in cases where FLint is used on scale as via flint-hadoop.

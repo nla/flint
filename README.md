@@ -46,7 +46,6 @@ Flint comes with several 'entry points' that make use of the core functionality
 
 * a Command Line Interface (flint-cli)
 * a simple GUI, using JavaFX8 (flint-fx-direct)
-* a Hadoop MapReduce module (flint-hadoop)
 
 ## How to install and use
 
@@ -56,9 +55,6 @@ To install you need:
 
 * Git client
 * Java Developers Kit
-  JDK6+ -- NOTE flint-hadoop and its dependencies are restricted to Java 6,
-  whereas flint-cli needs Java 7, and Flint-fx* requires Java 8.  We are planning
-  to drop Java 6 support soon.
 * Maven
 * Currently you will need a copy of (https://github.com/bl-dpt/dptutils) installed in your local maven repo
 
