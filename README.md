@@ -56,7 +56,6 @@ To install you need:
 * Git client
 * Java Developers Kit
 * Maven
-* Currently you will need a copy of (https://github.com/bl-dpt/dptutils) installed in your local maven repo
 
 ### Build
 
