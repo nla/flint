@@ -36,20 +36,6 @@ public class Tools {
 	private Tools() {
 		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * Creates a new temporary directory 
-	 * @return File object for new directory
-	 * @throws IOException file access error
-	 */
-	public static File newTempDir() {
-		
-		final String TMP_DIR = "/tmp/flint-hadoop/";
-		File dir = new File(TMP_DIR); 
-		dir.mkdirs();
-		return dir;
-		
-	}
 	
 	/**
 	 * Convenience method to zip the generated files together (no compression)

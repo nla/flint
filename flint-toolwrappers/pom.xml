@@ -3,7 +3,7 @@
     <parent>
         <artifactId>flint</artifactId>
         <groupId>au.gov.nla</groupId>
-        <version>0.9.2-SNAPSHOT</version>
+        <version>0.9.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>flint-toolwrappers</artifactId>
@@ -12,7 +12,7 @@
 
         <!-- utility collection by the DBT@BL -->
         <dependency>
-            <groupId>uk.bl.dpt</groupId>
+            <groupId>au.gov.nla</groupId>
             <artifactId>dptutils</artifactId>
         </dependency>
 

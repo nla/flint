@@ -19,9 +19,6 @@ package au.gov.nla.flint.formats;
 
 import au.gov.nla.flint.checks.CheckResult;
 import au.gov.nla.flint.checks.TimedValidation;
-import au.gov.nla.flint.hadoop.AdditionalMapTasks;
-import au.gov.nla.flint.hadoop.HadoopFormat;
-import au.gov.nla.flint.hadoop.PDFMapTasks;
 import au.gov.nla.flint.pdf.checks.FixedCategories;
 import au.gov.nla.flint.pdf.checks.PolicyValidation;
 import au.gov.nla.flint.pdf.checks.SpecificDrmChecks;
@@ -57,7 +54,7 @@ import java.util.TreeSet;
  * - LockLizard and HYPrLock emcapsulate pdfs in to a different drm-ed format
  * - Seems most PDF DRM uses Adobe Digital Editions
  */
-public class PDFFormat extends PolicyAware implements Format, HadoopFormat {
+public class PDFFormat extends PolicyAware implements Format {
 
     private final static String SCH_POLICY = "/pdf-policy-validate/pdf_policy_preflight_test.sch";
 
@@ -157,10 +154,5 @@ public class PDFFormat extends PolicyAware implements Format, HadoopFormat {
      */
     public static InputStream getPolicyStatically() {
         return PDFFormat.class.getResourceAsStream(SCH_POLICY);
-    }
-
-    @Override
-    public AdditionalMapTasks getAdditionalMapTasks() {
-        return new PDFMapTasks();
     }
 }
